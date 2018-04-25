@@ -91,7 +91,7 @@ angular.module("AngularApp", [])
 .controller("homeCtrl", ["$scope", "$http" , function($scope,$http) 
 {
 
-	var req = { method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10"}
+	var req = { method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F, j Y&count=10"}
 
     $http(req)
       .then(function(response) {
@@ -112,6 +112,46 @@ angular.module("AngularApp", [])
         // Request some file with data
 
         var req = {  method: 'GET', url: "https://smefutures.com/api/get_recent_posts/date_format=F,j Y&count=10&page=" + page }
+
+        $http(req)
+          .then(function(response) {
+              $scope.posts = $scope.posts.concat(response.data.posts);
+              loading = false;
+              page = page + 1;
+          });
+          
+    });
+
+
+}])
+
+.controller("categoryCtrl", ["$scope", "$http" , function($scope,$http) 
+{
+
+	var url      = window.location.href;     // Returns full URL
+ 	var id = url.split('=');
+  
+	var req = { method: 'GET', url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
+
+    $http(req)
+      .then(function(response) {
+          $scope.posts = response.data.posts;
+      });
+
+    var loading = false;
+    var page = 2;
+
+    // Attach 'infinite' event handler
+    $$('.infinite-scroll').on('infinite', function() 
+    {
+
+        // Exit, if loading in progress
+        if (loading) return;
+        // Set loading trigger
+        loading = true;
+        // Request some file with data
+
+       var req = { method: 'GET', url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
 
         $http(req)
           .then(function(response) {
