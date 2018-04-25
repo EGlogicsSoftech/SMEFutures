@@ -111,7 +111,7 @@ angular.module("AngularApp", [])
         loading = true;
         // Request some file with data
 
-        var req = {  method: 'GET', url: "https://smefutures.com/api/get_recent_posts/date_format=F,j Y&count=10&page=" + page }
+        var req = {  method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10&page=" + page }
 
         $http(req)
           .then(function(response) {
