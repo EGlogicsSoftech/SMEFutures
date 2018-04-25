@@ -23,9 +23,20 @@ angular.module("AngularApp", [])
     window.location.hash = "#!/home.html";
 })
 
-.controller("RootCtrl", ["$scope", "$compile", "$rootScope", function($scope, $compile, $rootScope) {
-    $scope.title = "Framework7.angular";
 
+// HTML PARSING
+.filter('renderHTMLCorrectly', function($sce)
+{
+	return function(stringToParse)
+	{
+		return $sce.trustAsHtml(stringToParse);
+	}
+})
+
+.controller("RootCtrl", ["$scope", "$compile", "$rootScope", function($scope, $compile, $rootScope) {
+    
+    $scope.title = "Framework7.angular";      
+          
     $$('.panel-left').on('open', function() {
         $$('.statusbar-overlay').addClass('with-panel-left');
     });
@@ -60,20 +71,57 @@ angular.module("AngularApp", [])
     }
 }])
 
-.controller("sideMenu", ["$scope", function($scope) {
+.controller("sideMenu", ["$scope", "$http" , function($scope,$http) {
 
-		if (loading) return;
+		//if (loading) return;
+        // Set loading trigger
+        //loading = true;
+        // Request some file with data
+
+        var req = { method: 'GET', url: "https://smefutures.com/api/get_category_index/"}
+
+        $http(req)
+          .then(function(response) {
+              $scope.cats = response.data.categories;
+              loading = false;
+          });
+
+}])
+
+.controller("homeCtrl", ["$scope", "$http" , function($scope,$http) 
+{
+
+	var req = { method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10"}
+
+    $http(req)
+      .then(function(response) {
+          $scope.posts = response.data.posts;
+      });
+
+    var loading = false;
+    var page = 2;
+
+    // Attach 'infinite' event handler
+    $$('.infinite-scroll').on('infinite', function() 
+    {
+
+        // Exit, if loading in progress
+        if (loading) return;
         // Set loading trigger
         loading = true;
         // Request some file with data
 
-        var req = { method: 'GET', url: "https://smefutures.com/api/get_category_index"}
+        var req = {  method: 'GET', url: "https://smefutures.com/api/get_recent_posts/date_format=F,j Y&count=10&page=" + page }
 
         $http(req)
           .then(function(response) {
-              $scope.cats = $scope.categories;
+              $scope.posts = $scope.posts.concat(response.data.posts);
               loading = false;
+              page = page + 1;
           });
+          
+    });
+
 
 }])
 
