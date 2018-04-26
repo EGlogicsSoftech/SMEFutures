@@ -172,6 +172,38 @@ angular.module("AngularApp", [])
 
 }])
 
+.controller("cartoonCtrl", ["$scope", "$http" , function($scope,$http) 
+{
+
+	var url      = window.location.href;     // Returns full URL
+ 	var id = url.split('=');
+  	$scope.showLoader = true;
+  	var photoBrowserPhotos = [];
+	var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
+
+    $http(req)
+      .then(function(response) {
+          $scope.cat_title = response.data.category.title;
+          $scope.posts = response.data.posts;
+          angular.forEach($scope.posts, function(post)
+          {
+				photoBrowserPhotos.push({ url:post.full_image  , caption:post.title });
+		  });
+		
+		var photoBrowserLazy = myApp.photoBrowser({
+        photos: photoBrowserPhotos,
+        lazyLoading: true,
+        theme: 'dark'
+		});
+		
+		photoBrowserLazy.open();		
+		$scope.showLoader = false;
+		
+      });
+
+
+}])
+
 .controller("PostController", ["$scope", "$http" , function($scope,$http) {
 
 		
