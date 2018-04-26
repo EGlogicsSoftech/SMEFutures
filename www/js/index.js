@@ -8,10 +8,19 @@ angular.module("AngularApp", [])
 .run(function() {
 
     myApp = new Framework7({
-        modalTitle: 'Framework7',
+        modalTitle: 'SME',
         material: true,
         pushState: true,
-        angular: true
+        angular: true,
+        // Hide and show indicator during ajax requests
+		onAjaxStart: function (xhr) {
+			myApp.showIndicator();
+		},
+		onAjaxComplete: function (xhr) {
+			myApp.hideIndicator();
+		},
+		hideTabbarOnPageScroll : true
+		
     });
     mainView = myApp.addView('.view-main', {});
 })
