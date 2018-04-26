@@ -38,7 +38,6 @@
   <param name="android-package" value="nl.xservices.plugins.SocialSharing" />
 </feature>
 
-  
   <platform name="android">
 	<icon density="ldpi" src="res/icons/android/drawable-ldpi-icon.png" />
 	<icon density="mdpi" src="res/icons/android/drawable-mdpi-icon.png" />
