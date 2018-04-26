@@ -100,6 +100,25 @@ angular.module("AngularApp", [])
 .controller("homeCtrl", ["$scope", "$http" , function($scope,$http) 
 {
 
+	$scope.tabs = [ {'title':'Technology','id':'15'},{'title':'Women','id':'16'},{'title':'Leadership','id':'17'},{'title':'Ideas','id':'18'},{'title':'Commentary','id':'19'}];
+	
+    
+    $scope.onTabClick = function(id) {
+    		
+    		$scope.showLoader = true;
+			var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id}
+
+			$http(req)
+			  .then(function(response) {
+				  $scope.posts = response.data.posts;
+			  });
+
+			var loading = false;
+			$scope.showLoader = false;
+
+    };
+    
+	
 	$scope.showLoader = true;
 	var req = { method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F, j Y&count=10"}
 
