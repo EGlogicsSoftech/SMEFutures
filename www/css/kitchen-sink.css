@@ -20,10 +20,10 @@
   height: 42px;
 }
 .item-media img {
-  width: auto;
+ /* width: auto;
   height: auto;
   max-width: 40px;
-  border-radius: 50%;
+  border-radius: 50%;*/
 }
 .tabbar i.icon {
   -webkit-transition: 200ms;
@@ -346,4 +346,37 @@ div.ks-demo-lazy {
 }
 .ks-facebook-card .card-content-inner {
   padding: 15px 10px;
+}
+
+.list-block .item-text
+{
+    max-height: 56px !important;
+}
+
+.list-block .item-subtitle {
+    margin-top: 7px;
+    font-size: 11px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100%;
+    text-overflow: ellipsis;
+}
+
+.list-block .item-title {
+
+    position: relative;
+    white-space: inherit;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: 700;
+}
+.content-block-title
+{
+	padding-top:0px;
+}
+.content-block-title h2
+{
+	margin:0px;
 }

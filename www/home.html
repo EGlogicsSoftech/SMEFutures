@@ -12,26 +12,22 @@
   </div>
   <div class="page-content">
     <div class="tabs">
-      <div id="recent" class="tab active">
-        <div class="content-block">
-          
-           <div data-distance="500" class="page-content infinite-scroll">
-    
-				<div class="card ks-card-header-pic" ng-repeat="post in posts" >
-
-				  <div style="background-image:url({{post.thumbnail}})" valign="bottom" class="card-header color-white no-border">{{post.title}}</div>
-				  <div class="card-content"> 
-					<div class="card-content-inner"> 
-					  <p class="color-gray">Posted on {{post.date}}</p>
-					  <p ng-bind-html="post.excerpt | renderHTMLCorrectly " ></p>
+      <div data-distance="500" class="infinite-scroll">
+		  <div id="recent" class="tab active">
+			  <div class="content-block">
+					<div class="card ks-card-header-pic" ng-repeat="post in posts" >
+						<div style="background-image:url({{post.thumbnail}})" valign="bottom" class="card-header color-white no-border">{{post.title}}</div>
+						  <div class="card-content"> 
+							<div class="card-content-inner"> 
+							  <p class="color-gray">Posted on {{post.date}}</p>
+							  <p ng-bind-html="post.excerpt | renderHTMLCorrectly " ></p>
+							</div>
+						  </div>
+						  <div class="card-footer"><a href="#" class="link">Share</a><a href="post.html?id={{post.id}}" class="link">Read more</a></div>
 					</div>
-				  </div>
-				  <div class="card-footer"><a href="#" class="link">Share</a><a href="post.html?id={{post.id}}" class="link">Read more</a></div>
-				</div>
 	
-			</div>
-          
-        </div>
+				</div>
+          </div>
       </div>
       <div id="tab-2" class="tab">
         <div class="content-block">

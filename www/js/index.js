@@ -78,7 +78,7 @@ angular.module("AngularApp", [])
         //loading = true;
         // Request some file with data
 
-        var req = { method: 'GET', url: "https://smefutures.com/api/get_category_index/"}
+        var req = { method: 'GET', cache:true , url: "https://smefutures.com/api/get_category_index/"}
 
         $http(req)
           .then(function(response) {
@@ -111,7 +111,7 @@ angular.module("AngularApp", [])
         loading = true;
         // Request some file with data
 
-        var req = {  method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10&page=" + page }
+        var req = {  method: 'GET', cache:true ,url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10&page=" + page }
 
         $http(req)
           .then(function(response) {
@@ -131,11 +131,12 @@ angular.module("AngularApp", [])
 	var url      = window.location.href;     // Returns full URL
  	var id = url.split('=');
   
-	var req = { method: 'GET', url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
+	var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
 
     $http(req)
       .then(function(response) {
           $scope.posts = response.data.posts;
+          $scope.title = response.data.category.title;
       });
 
     var loading = false;
@@ -151,7 +152,7 @@ angular.module("AngularApp", [])
         loading = true;
         // Request some file with data
 
-       var req = { method: 'GET', url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
+       var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
 
         $http(req)
           .then(function(response) {
@@ -162,6 +163,21 @@ angular.module("AngularApp", [])
           
     });
 
+
+}])
+
+.controller("PostController", ["$scope", "$http" , function($scope,$http) {
+
+		
+		var url      = window.location.href;     // Returns full URL
+ 		var id = url.split('=');
+ 	
+        var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_post/?date_format=F,j Y&id="+id[1] }
+
+        $http(req)
+          .then(function(response) {
+              $scope.post = response.data.post;
+          });
 
 }])
 
