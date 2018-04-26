@@ -8,11 +8,11 @@
       </div>
   </div>
 
-  <a href="#" class="floating-button color-pink"><i class="icon icon-plus"></i></a>
+  <a href="" onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" class="floating-button color-pink"><i class="icon icon-plus"></i></a>
   <div class="page-content">
+  	<img src="{{post.thumbnail}}" width="100%"/>
     <div class="content-block">
-      <img src="{{post.thumbnail}}" width="100%"/>
-      <h2>{{post.title}}</h2>
+      <h2 ng-bind-html="post.title | renderHTMLCorrectly " ></h2>
     </div>
     <div class="content-block" ng-bind-html="post.content | renderHTMLCorrectly ">
     </div>
