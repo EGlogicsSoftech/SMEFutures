@@ -8,8 +8,11 @@
 		</div>
 	  </div>
 	  
+	  <div class="im_loading" ng-show="showLoader"><!-- so this div containing img will be dislpayed only when the showLoader is equal to true-->
+	  </div>
+	
 	<div data-distance="150" class="page-content infinite-scroll">
-    	<div class="content-block-title"><h2>{{title}}</h2></div>
+    	<div class="content-block-title"><h2>{{cat_title}}</h2></div>
 		<div class="list-block media-list" >
 			  <ul>
 					<li ng-repeat="post in posts" >
@@ -27,4 +30,5 @@
 			   </ul>
 		 </div>
   	</div>
+  	<!-- infinite Scroll Div -->
 </div>

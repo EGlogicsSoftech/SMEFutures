@@ -7,8 +7,11 @@
         <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
       </div>
   </div>
-
-  <a href="" onclick="window.plugins.socialsharing.share('Message and link', null, null, 'http://www.x-services.nl')" class="floating-button color-pink"><i class="icon icon-plus"></i></a>
+ 
+  <div class="im_loading" ng-show="showLoader"><!-- so this div containing img will be dislpayed only when the showLoader is equal to true-->
+  </div>
+  
+  <a href="" onclick="window.plugins.socialsharing.share('{{post.title}}', null, null, '{{post.url}}')" class="floating-button color-pink"><i class="icon icon-plus"></i></a>
   <div class="page-content">
   	<img src="{{post.thumbnail}}" width="100%"/>
     <div class="content-block">

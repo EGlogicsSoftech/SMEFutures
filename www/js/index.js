@@ -91,6 +91,7 @@ angular.module("AngularApp", [])
 .controller("homeCtrl", ["$scope", "$http" , function($scope,$http) 
 {
 
+	$scope.showLoader = true;
 	var req = { method: 'GET', url: "https://smefutures.com/api/get_recent_posts/?date_format=F, j Y&count=10"}
 
     $http(req)
@@ -99,6 +100,7 @@ angular.module("AngularApp", [])
       });
 
     var loading = false;
+    $scope.showLoader = false;
     var page = 2;
 
     // Attach 'infinite' event handler
@@ -109,6 +111,7 @@ angular.module("AngularApp", [])
         if (loading) return;
         // Set loading trigger
         loading = true;
+        $scope.showLoader = true;
         // Request some file with data
 
         var req = {  method: 'GET', cache:true ,url: "https://smefutures.com/api/get_recent_posts/?date_format=F,j Y&count=10&page=" + page }
@@ -117,6 +120,7 @@ angular.module("AngularApp", [])
           .then(function(response) {
               $scope.posts = $scope.posts.concat(response.data.posts);
               loading = false;
+              $scope.showLoader = false;
               page = page + 1;
           });
           
@@ -130,16 +134,16 @@ angular.module("AngularApp", [])
 
 	var url      = window.location.href;     // Returns full URL
  	var id = url.split('=');
-  
+  	$scope.showLoader = true;
 	var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
 
     $http(req)
       .then(function(response) {
+          $scope.cat_title = response.data.category.title;
           $scope.posts = response.data.posts;
-          $scope.title = response.data.category.title;
+           $scope.showLoader = false;
       });
 
-    var loading = false;
     var page = 2;
 
     // Attach 'infinite' event handler
@@ -150,6 +154,7 @@ angular.module("AngularApp", [])
         if (loading) return;
         // Set loading trigger
         loading = true;
+        $scope.showLoader = true;
         // Request some file with data
 
        var req = { method: 'GET', cache:true ,url: "https://smefutures.com/api/get_category_posts/?date_format=F, j Y&count=10&id="+id[1]}
@@ -159,6 +164,7 @@ angular.module("AngularApp", [])
               $scope.posts = $scope.posts.concat(response.data.posts);
               loading = false;
               page = page + 1;
+              $scope.showLoader = false;
           });
           
     });
