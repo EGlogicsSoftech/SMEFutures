@@ -26,7 +26,7 @@
 							  <p ng-bind-html="post.excerpt | renderHTMLCorrectly " ></p>
 							</div>
 						  </div>
-						  <div class="card-footer"><a href="" onclick="window.plugins.socialsharing.share( {{post.title}} , null, null, {{post.url}} )" class="link">Share</a><a href="post.html?id=post.id" class="link">Read more</a></div>
+						  <div class="card-footer"><a href="" onclick="window.plugins.socialsharing.share( post.title , null, null, post.url )" class="link">Share</a><a href="post.html?id=post.id" class="link">Read more</a></div>
 					</div>
           </div>
           
@@ -41,7 +41,7 @@
 							  <p ng-bind-html="post.excerpt | renderHTMLCorrectly " ></p>
 							</div>
 						  </div>
-						  <div class="card-footer"><a href="#" onclick="window.plugins.socialsharing.share( {{post.title}} , null, null, {{post.url}} )" class="link">Share</a><a href="post.html?id={{post.id}}" class="link">Read more</a></div>
+						  <div class="card-footer"><a href="" onclick="window.plugins.socialsharing.share( post.title , null, null, post.url )" class="link">Share</a><a href="post.html?id={{post.id}}" class="link">Read more</a></div>
 					</div>
           </div>
     
